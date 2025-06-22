@@ -24,3 +24,21 @@ f1.__proto__ === f2.__proto__   // ✅ true
 
 All instances created with the same constructor function share the same prototype object
 */
+
+function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHello = function () {
+  return `Hello, I'm ${this.name}`;
+};
+const p1 = new Person("Raghav");
+Person.prototype.sayHello = function () {
+  return `Hi, my name is ${this.name}`;
+};
+console.log(p1.sayHello()); // Hi, my name is Raghav
+const p2 = new Person("Dhingra");
+console.log(p2.sayHello()); // Hi, my name is Dhingra
+/*
+- Both p1 and p2 share the same prototype
+- Even though p1 was created before the prototype was updated, it doesn't get a copy of sayHello — it just keeps a reference to the prototype chain
+*/
